@@ -18,18 +18,6 @@ class Server {
     this.app.get("/api", (req, res) => {
       res.json({ msg: "get api" });
     });
-
-    this.app.put("/api", (req, res) => {
-      res.json({ msg: "put api" });
-    });
-
-    this.app.post("/api", (req, res) => {
-      res.json({ msg: "post api" });
-    });
-
-    this.app.delete("/api", (req, res) => {
-      res.json({ msg: "delete api" });
-    });
   }
   //Escuchar
   listen() {
