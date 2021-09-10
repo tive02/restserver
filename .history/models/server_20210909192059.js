@@ -5,7 +5,6 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.usersPatch = "/api/users";
     //middlewares
     this.middlewares();
     //rutas de la aplicacion
@@ -19,7 +18,7 @@ class Server {
   }
   // respond with "hello world" when a GET request is made to the homepage
   routes() {
-    this.app.use(this.usersPatch, require("../routes/user"));
+    this.app.use("/api/users", require("../routes/user"));
   }
   //Escuchar
   listen() {
