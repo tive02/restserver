@@ -1,15 +1,7 @@
-const { response, request } = require("express");
+const { response } = require("express");
 
-const usersGet = (req = request, res = response) => {
-  const { q, name = "not name", apikey, page = 1, limit } = req.query;
-  res.json({
-    msg: "get api-Controlador",
-    q,
-    name,
-    apikey,
-    page,
-    limit,
-  });
+const usersGet = (req, res = response) => {
+  res.json({ msg: "get api-Controlador" });
 };
 
 const usersPost = (req, res = response) => {
