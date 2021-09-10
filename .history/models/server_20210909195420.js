@@ -15,7 +15,7 @@ class Server {
     //Cors
     this.app.use(cors());
 
-    //Lectura y parseo del body
+    //Lectura y paarseo del body
     this.app.use(express.json());
 
     //Directorio publico

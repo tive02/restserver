@@ -5,9 +5,9 @@ const usersGet = (req, res = response) => {
 };
 
 const usersPost = (req, res = response) => {
-  const { nombre, edad } = req.body;
+  const body = req.body;
 
-  res.json({ msg: "Post api-Controlador", nombre, edad });
+  res.json({ msg: "Post api-Controlador", body });
 };
 
 const usersPut = (req, res = response) => {
