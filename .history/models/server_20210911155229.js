@@ -7,9 +7,6 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.usersPatch = "/api/users";
-    //Conectar la base de datos
-    this.connectDB();
-
     //middlewares
     this.middlewares();
     //rutas de la aplicacion
