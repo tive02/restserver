@@ -9,7 +9,7 @@ class Server {
     //creacion usuarios
     this.usersPatch = "/api/users";
     //Autenticacion de usuarios
-    this.authPath = "/api/auth";
+    this.authPatch = "/api/auth";
     //Conectar la base de datos
     this.connectDB();
 
@@ -35,7 +35,6 @@ class Server {
   }
   // respond with "hello world" when a GET request is made to the homepage
   routes() {
-    this.app.use(this.authPath, require("../routes/auth"));
     this.app.use(this.usersPatch, require("../routes/user"));
   }
   //Escuchar
