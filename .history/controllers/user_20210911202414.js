@@ -27,7 +27,7 @@ const usersPost = async (req, res = response) => {
   res.json({ user });
 };
 
-const usersPut = async (req, res = response) => {
+const usersPut = (req, res = response) => {
   const { id } = req.params;
   const { _id, password, google, email, ...rest } = req.body;
 
@@ -37,7 +37,7 @@ const usersPut = async (req, res = response) => {
     rest.password = bcryptjs.hashSync(password, salt);
   }
 
-  const user = await User.findByIdAndUpdate(id, rest);
+  const user = await Usuario.findByIdAndUpdate(id, rest);
 
   res.json(user);
 };
