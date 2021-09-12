@@ -10,11 +10,6 @@ const {
 } = require("../controllers/user");
 
 const { validateFields } = require("../middlewares/validate-fields");
-const {
-  isValidRole,
-  emailExists,
-  existsUserForId,
-} = require("../helpers/db-validators");
 
 const router = Router();
 
