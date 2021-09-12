@@ -9,8 +9,6 @@ const {
   usersPatch,
 } = require("../controllers/user");
 
-const { validateFields } = require("../middlewares/validate-fields");
-
 const router = Router();
 
 router.get("/", usersGet);
@@ -26,9 +24,9 @@ router.post(
     }),
     check("email", "El correo no es válido").isEmail(),
     //check("email").custom(emailExiste),
-    check("role", "No es un rol válido").isIn(["ADMIN_ROLE", "USER_ROLE"]),
+    // check('rol', 'No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE']),
     //check("role").custom(esRoleValido),
-    validateFields,
+    //validarCampos
   ],
   usersPost
 );

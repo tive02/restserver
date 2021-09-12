@@ -23,7 +23,6 @@ const usersPost = async (req, res = response) => {
   user.password = bcryptjs.hashSync(password, salt);
   //add a BD
   await user.save();
-
   res.json({ user });
 };
 

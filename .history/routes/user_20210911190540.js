@@ -9,8 +9,6 @@ const {
   usersPatch,
 } = require("../controllers/user");
 
-const { validateFields } = require("../middlewares/validate-fields");
-
 const router = Router();
 
 router.get("/", usersGet);

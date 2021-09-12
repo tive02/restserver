@@ -15,14 +15,13 @@ const usersGet = (req = request, res = response) => {
 };
 
 const usersPost = async (req, res = response) => {
-  const { name, email, password, role } = req.body;
-  const user = new User({ name, email, password, role });
-  //validar correo
+  const { nombre, correo, password, rol } = req.body;
+  const user = new User({ nombre, correo, password, rol });
+  //add a BD
+  await user.save();
   // Encriptar la contraseña
   const salt = bcryptjs.genSaltSync();
   user.password = bcryptjs.hashSync(password, salt);
-  //add a BD
-  await user.save();
 
   res.json({ user });
 };
