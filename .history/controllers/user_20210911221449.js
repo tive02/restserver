@@ -2,13 +2,13 @@ const { response, request } = require("express");
 const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
 
-const usersGet = async (req = request, res = response) => {
+const usersGet = (req = request, res = response) => {
   const { limit = 5, from = 0 } = req.query;
   const query = { state: true };
 
   const [total, users] = await Promise.all([
-    User.countDocuments(query),
-    User.find(query).skip(Number(from)).limit(Number(limit)),
+    Usuario.countDocuments(query),
+    Usuario.find(query).skip(Number(from)).limit(Number(limit)),
   ]);
 
   res.json({
@@ -20,7 +20,7 @@ const usersGet = async (req = request, res = response) => {
 const usersPost = async (req, res = response) => {
   const { name, email, password, role } = req.body;
   const user = new User({ name, email, password, role });
-
+  //validar correo
   // Encriptar la contraseña
   const salt = bcryptjs.genSaltSync();
   user.password = bcryptjs.hashSync(password, salt);
@@ -45,15 +45,8 @@ const usersPut = async (req, res = response) => {
   res.json(user);
 };
 
-const usersDelete = async (req, res = response) => {
-  const { id } = req.params;
-
-  // Fisicamente lo borramos
-  // const usuario = await Usuario.findByIdAndDelete( id );
-
-  const user = await User.findByIdAndUpdate(id, { state: false });
-
-  res.json(user);
+const usersDelete = (req, res = response) => {
+  res.json({ msg: "Delete api-Controlador" });
 };
 
 const usersPatch = (req, res = response) => {

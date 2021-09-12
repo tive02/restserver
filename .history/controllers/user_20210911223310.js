@@ -12,7 +12,7 @@ const usersGet = async (req = request, res = response) => {
   ]);
 
   res.json({
-    total,
+    //total,
     users,
   });
 };
@@ -45,15 +45,8 @@ const usersPut = async (req, res = response) => {
   res.json(user);
 };
 
-const usersDelete = async (req, res = response) => {
-  const { id } = req.params;
-
-  // Fisicamente lo borramos
-  // const usuario = await Usuario.findByIdAndDelete( id );
-
-  const user = await User.findByIdAndUpdate(id, { state: false });
-
-  res.json(user);
+const usersDelete = (req, res = response) => {
+  res.json({ msg: "Delete api-Controlador" });
 };
 
 const usersPatch = (req, res = response) => {

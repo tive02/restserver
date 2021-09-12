@@ -12,7 +12,7 @@ const usersGet = async (req = request, res = response) => {
   ]);
 
   res.json({
-    total,
+    //total,
     users,
   });
 };
@@ -45,7 +45,7 @@ const usersPut = async (req, res = response) => {
   res.json(user);
 };
 
-const usersDelete = async (req, res = response) => {
+const usersDelete = (req, res = response) => {
   const { id } = req.params;
 
   // Fisicamente lo borramos
