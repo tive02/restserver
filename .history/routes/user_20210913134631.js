@@ -11,7 +11,7 @@ const {
 
 const { validateFields } = require("../middlewares/validate-fields");
 const { validateJWT } = require("../middlewares/validate-jwt");
-const { isAdminRole, whichRole } = require("../middlewares/validate-roles");
+const { isAdminRole } = require("../middlewares/validate-roles");
 const {
   isValidRole,
   emailExists,
@@ -54,7 +54,6 @@ router.delete(
   [
     validateJWT,
     //isAdminRole,
-    whichRole("ADMIN_ROLE", "VENTAR_ROLE", "OTRO_ROLE"),
     check("id", "No es un ID válido").isMongoId(),
     check("id").custom(existsUserForId),
     validateFields,
