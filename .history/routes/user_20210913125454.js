@@ -52,8 +52,8 @@ router.post(
 router.delete(
   "/:id",
   [
-    validateJWT,
     isAdminRole,
+    validateJWT,
     check("id", "No es un ID válido").isMongoId(),
     check("id").custom(existsUserForId),
     validateFields,
