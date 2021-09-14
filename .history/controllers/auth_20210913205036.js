@@ -2,7 +2,7 @@ const { response, request } = require("express");
 const bcryptjs = require("bcryptjs");
 const User = require("../models/user");
 const { generateJWT } = require("../helpers/generate-jwt");
-const { googleVerify } = require("../helpers/google-verify");
+const googleVerify = require("../helpers/google-verify");
 
 const login = async (req, res = response) => {
   const { email, password } = req.body;
@@ -42,8 +42,9 @@ const login = async (req, res = response) => {
   }
 };
 
-const googleSignin = async (req = request, res = response) => {
+const googleSignin = (req = request, res = response) => {
   const { id_token } = req.body;
+
   try {
     const googleUSer = await googleVerify(id_token);
     console.log(googleUSer);
@@ -81,7 +82,6 @@ const googleSignin = async (req = request, res = response) => {
     //});
     res.json({
       msg: "Todo esta OK- google sign in",
-      googleUSer,
     });
   } catch (error) {
     res.status(400).json({

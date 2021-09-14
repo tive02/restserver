@@ -81,7 +81,6 @@ const googleSignin = async (req = request, res = response) => {
     //});
     res.json({
       msg: "Todo esta OK- google sign in",
-      googleUSer,
     });
   } catch (error) {
     res.status(400).json({
