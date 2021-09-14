@@ -3,7 +3,10 @@ const { check } = require("express-validator");
 
 const { validateFields } = require("../middlewares/validate-fields");
 
-const { login, googleSignin } = require("../controllers/auth");
+const { login } = require("../controllers/auth");
+const {
+  googleSignin,
+} = require("../../curso-node-restserver-3.0.0/controllers/auth");
 
 const router = Router();
 

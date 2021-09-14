@@ -29,7 +29,7 @@
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
         let id_token = googleUser.getAuthResponse().id_token;
-        const data = { id_token };
+        const data = { as: 123 };
 
         fetch(url, {
           method: "POST",

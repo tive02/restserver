@@ -43,11 +43,10 @@ const login = async (req, res = response) => {
 
 const googleSignin = (req = request, res = response) => {
   res.json({
-    msg: "Todo esta OK- google sign in",
+    msg: "Todo esta OK",
   });
 };
 
 module.exports = {
   login,
-  googleSignin,
 };
