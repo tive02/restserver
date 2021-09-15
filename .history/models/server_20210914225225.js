@@ -6,14 +6,14 @@ class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.paths = {
+    this.paths={
+      
       //creacion usuarios
-      auth: "/api/auth",
-      //categorias de los productos.
-      categories: "/api/categories",
+      users = "/api/users",
       //Autenticacion de usuarios
-      users: "/api/users",
-    };
+      authP = "/api/auth",
+
+    }
     //Conectar la base de datos
     this.connectDB();
 
@@ -39,9 +39,8 @@ class Server {
   }
   // respond with "hello world" when a GET request is made to the homepage
   routes() {
-    this.app.use(this.paths.auth, require("../routes/auth"));
-    this.app.use(this.paths.categories, require("../routes/categories"));
-    this.app.use(this.paths.users, require("../routes/user"));
+    this.app.use(this.authPath, require("../routes/auth"));
+    this.app.use(this.usersPatch, require("../routes/user"));
   }
   //Escuchar
   listen() {

@@ -40,7 +40,6 @@ class Server {
   // respond with "hello world" when a GET request is made to the homepage
   routes() {
     this.app.use(this.paths.auth, require("../routes/auth"));
-    this.app.use(this.paths.categories, require("../routes/categories"));
     this.app.use(this.paths.users, require("../routes/user"));
   }
   //Escuchar
