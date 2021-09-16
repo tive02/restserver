@@ -1,7 +1,5 @@
 const { Category, Role, User } = require("../models");
 
-/* ***Roles del usuario */
-
 const isValidRole = async (role = "") => {
   const roleExists = await Role.findOne({ role });
   if (!roleExists) {
@@ -9,7 +7,6 @@ const isValidRole = async (role = "") => {
   }
 };
 
-/* ***Existencia del email del usuario */
 const emailExists = async (email = "") => {
   // Verificar si el email existe
   const existEmail = await User.findOne({ email });
@@ -26,9 +23,7 @@ const existsUserForId = async (id) => {
   }
 };
 
-/*
-Categorias 
-*/
+//Categorias
 const existsCategoryForId = async (id) => {
   // Verificar si el usuario existe
   const existsCategory = await Category.findById(id);
