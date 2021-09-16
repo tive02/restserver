@@ -1,4 +1,4 @@
-const { response, request } = require("express");
+const { response } = require("express");
 const { Category } = require("../models");
 
 //Obtener Categoria- paginado - total -populate
@@ -10,7 +10,7 @@ const getCategories = async (req = request, res = response) => {
     Category.countDocuments(query),
     Category.find(query)
       .populate("user", "name")
-      .skip(Number(from))
+      .pop.skip(Number(from))
       .limit(Number(limit)),
   ]);
 
@@ -20,14 +20,7 @@ const getCategories = async (req = request, res = response) => {
   });
 };
 
-//Obtener una categoria populate
-
-const getCategoriesForID = async (req = request, res = response) => {
-  const { id } = req.params;
-  const category = await Category.findById(id).populate("user", "name");
-
-  res.json(category);
-};
+//Obtener categoria populate
 
 //crear categoria
 const createCategory = async (req, res = response) => {
@@ -57,34 +50,9 @@ const createCategory = async (req, res = response) => {
 
 //Actualizar categoria
 
-const upgradeCategory = async (req = request, res = response) => {
-  const { id } = req.params;
-  const { state, user, ...rest } = req.body;
-
-  rest.name = rest.name.toUpperCase();
-  rest.user = req.user._id;
-
-  const category = await Category.findByIdAndUpdate(id, rest, { new: true });
-
-  res.json(category);
-};
-
 //Borrar categoria - estadofalse
-const deleteCategory = async (req, res = response) => {
-  const { id } = req.params;
-  const categoryDelete = await Category.findByIdAndUpdate(
-    id,
-    { state: false },
-    { new: true }
-  );
-
-  res.json(categoryDelete);
-};
 
 module.exports = {
   getCategories,
-  getCategoriesForID,
   createCategory,
-  upgradeCategory,
-  deleteCategory,
 };

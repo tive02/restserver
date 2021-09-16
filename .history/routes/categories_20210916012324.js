@@ -42,8 +42,7 @@ router.put(
   "/:id",
   [
     validateJWT,
-    check("name", "El nombre es obligatorio").not().isEmpty(),
-    check("id", "No es un id de Mongo válido").isMongoId(),
+    check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("id").custom(existsCategoryForId),
     validateFields,
   ],

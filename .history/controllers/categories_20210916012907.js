@@ -61,8 +61,8 @@ const upgradeCategory = async (req = request, res = response) => {
   const { id } = req.params;
   const { state, user, ...rest } = req.body;
 
-  rest.name = rest.name.toUpperCase();
-  rest.user = req.user._id;
+  data.name = data.name.toUpperCase();
+  data.user = req.user._id;
 
   const category = await Category.findByIdAndUpdate(id, rest, { new: true });
 

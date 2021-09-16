@@ -5,11 +5,10 @@ const {
   getCategoriesForID,
   createCategory,
   upgradeCategory,
-  deleteCategory,
 } = require("../controllers/categories");
 const { existsCategoryForId } = require("../helpers/db-validators");
 
-const { validateFields, validateJWT, isAdminRole } = require("../middlewares");
+const { validateFields, validateJWT } = require("../middlewares");
 
 const router = Router();
 //Obtener todas las categorias publicas
@@ -42,8 +41,7 @@ router.put(
   "/:id",
   [
     validateJWT,
-    check("name", "El nombre es obligatorio").not().isEmpty(),
-    check("id", "No es un id de Mongo válido").isMongoId(),
+    check("nombre", "El nombre es obligatorio").not().isEmpty(),
     check("id").custom(existsCategoryForId),
     validateFields,
   ],
@@ -51,16 +49,8 @@ router.put(
 );
 
 //Borrar una categoria por id - ADMIN
-router.delete(
-  "/:id",
-  [
-    validateJWT,
-    isAdminRole,
-    check("id", "No es un id de Mongo válido").isMongoId(),
-    check("id").custom(existsCategoryForId),
-    validateFields,
-  ],
-  deleteCategory
-);
+router.delete("/:id", (req, res) => {
+  res.json("Delete id");
+});
 
 module.exports = router;

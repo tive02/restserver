@@ -26,7 +26,7 @@ const existsUserForId = async (id) => {
 };
 
 //Categorias
-const existsCategoryForId = async (id) => {
+const existsCategoryrForId = async (id) => {
   // Verificar si el usuario existe
   const existsCategory = await Category.findById(id);
   if (!existsCategory) {
@@ -38,5 +38,5 @@ module.exports = {
   isValidRole,
   emailExists,
   existsUserForId,
-  existsCategoryForId,
+  existsCategoryrForId,
 };
