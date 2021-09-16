@@ -1,4 +1,4 @@
-const { Category, Role, User, Product } = require("../models");
+const { Category, Role, User } = require("../models");
 
 /* ***Roles del usuario */
 
@@ -42,8 +42,8 @@ const existsCategoryForId = async (id) => {
  */
 const existsProductForId = async (id) => {
   // Verificar si el correo existe
-  const existsProduct = await Product.findById(id);
-  if (!existsProduct) {
+  const existeProducto = await Producto.findById(id);
+  if (!existeProducto) {
     throw new Error(`El id no existe ${id}`);
   }
 };
