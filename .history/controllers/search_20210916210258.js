@@ -17,7 +17,7 @@ const searchUser = async (word = "", res = response) => {
   const regex = new RegExp(word, "i");
   const users = await User.find({
     $or: [{ name: regex }, { email: regex }],
-    $and: [{ state: true }],
+    $and: [{ estado: true }],
   });
 
   res.json({
