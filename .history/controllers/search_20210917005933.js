@@ -105,7 +105,7 @@ const searchProductsForCategory = async (req = request, res = response) => {
     });
 
     res.json({
-      results: products ? products : [],
+      results: products ? [products] : [],
     });
   }
 };

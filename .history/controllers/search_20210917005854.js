@@ -2,6 +2,7 @@ const { request, response } = require("express");
 const mongoose = require("mongoose");
 const { ObjectId } = require("mongoose").Types;
 const { User, Category, Product } = require("../models");
+const products = require("./products");
 
 const allowebCollection = ["users", "categories", "products", "roles"];
 
@@ -104,10 +105,13 @@ const searchProductsForCategory = async (req = request, res = response) => {
       category: id,
     });
 
-    res.json({
-      results: products ? products : [],
+    return res.json({
+      results: products ? [products] : [],
     });
   }
+  res.json({
+    results: products,
+  });
 };
 
 module.exports = {
