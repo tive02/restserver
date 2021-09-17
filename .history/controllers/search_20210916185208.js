@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const { ObjectId } = require("mongoose").Types;
 const { User, Category, Product } = require("../models");
 
 const allowebCollection = ["users", "categories", "products", "roles"];
@@ -13,6 +12,10 @@ const searchUser = async (word = "", res = response) => {
       results: user ? [user] : [],
     });
   }
+
+  res.json({
+    results: user,
+  });
 };
 
 //Busqueda por coleccion que es exportada
@@ -25,22 +28,10 @@ const search = (req = request, res = response) => {
     });
   }
 
-  switch (collection) {
-    case "users":
-      searchUser(word, res);
-      break;
-    case "categories":
-      //buscarCategorias(word, res);
-      break;
-    case "products":
-      // buscarProductos(word, res);
-      break;
-
-    default:
-      res.status(500).json({
-        msg: "Se le olvido hacer esta búsquda",
-      });
-  }
+  res.json({
+    collection,
+    word,
+  });
 };
 
 module.exports = {

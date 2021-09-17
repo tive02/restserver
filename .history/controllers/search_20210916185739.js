@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const { ObjectId } = require("mongoose").Types;
 const { User, Category, Product } = require("../models");
 
 const allowebCollection = ["users", "categories", "products", "roles"];
