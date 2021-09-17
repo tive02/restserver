@@ -44,25 +44,27 @@ const searchCategory = async (word = "", res = response) => {
   });
 };
 
-//Buscar productos
-const searchProducts = async (word = "", res = response) => {
-  const isMongoID = ObjectId.isValid(word); // TRUE
+const buscarProductos = async (termino = "", res = response) => {
+  const esMongoID = ObjectId.isValid(termino); // TRUE
 
-  if (isMongoID) {
-    const product = await Product.findById(word).populate("category", "name");
+  if (esMongoID) {
+    const producto = await Producto.findById(termino).populate(
+      "categoria",
+      "nombre"
+    );
     return res.json({
-      results: product ? [product] : [],
+      results: producto ? [producto] : [],
     });
   }
 
-  const regex = new RegExp(word, "i");
-  const products = await Product.find({
-    name: regex,
-    state: true,
-  }).populate("category", "name");
+  const regex = new RegExp(termino, "i");
+  const productos = await Producto.find({
+    nombre: regex,
+    estado: true,
+  }).populate("categoria", "nombre");
 
   res.json({
-    results: products,
+    results: productos,
   });
 };
 //Busqueda por coleccion que es exportada
@@ -83,7 +85,7 @@ const search = (req = request, res = response) => {
       searchCategory(word, res);
       break;
     case "products":
-      searchProducts(word, res);
+      buscarProductos(word, res);
       break;
 
     default:
