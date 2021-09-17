@@ -108,6 +108,10 @@ const searchProductsForCategory = async (req = request, res = response) => {
       results: products ? [products] : [],
     });
   }
+
+  res.json({
+    results: products,
+  });
 };
 
 module.exports = {

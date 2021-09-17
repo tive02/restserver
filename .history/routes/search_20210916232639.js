@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const { search, searchProductsForCategory } = require("../controllers/search");
+const { search, searchProductForCategory } = require("../controllers/search");
 
 const router = Router();
 
 router.get("/:collection/:word", search);
-router.get("/:category", searchProductsForCategory);
+router.get("/:category", searchProductForCategory);
 
 module.exports = router;

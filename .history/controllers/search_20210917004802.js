@@ -108,6 +108,16 @@ const searchProductsForCategory = async (req = request, res = response) => {
       results: products ? [products] : [],
     });
   }
+
+  const regex = new RegExp(category, "i");
+  const products = await Product.find({
+    name: regex,
+    state: true,
+  }).populate("category", "name");
+
+  res.json({
+    results: products,
+  });
 };
 
 module.exports = {

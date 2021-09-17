@@ -100,14 +100,24 @@ const searchProductsForCategory = async (req = request, res = response) => {
   const id = mongoose.Types.ObjectId(category);
 
   if (isMongoID) {
-    const products = await Product.find({
+    const product = await Product.populate("category", "name").find({
       category: id,
     });
 
     return res.json({
-      results: products ? [products] : [],
+      results: product ? [product] : [],
     });
   }
+
+  const regex = new RegExp(category, "i");
+  const products = await Product.find({
+    name: regex,
+    state: true,
+  }).populate("category", "name");
+
+  res.json({
+    results: products,
+  });
 };
 
 module.exports = {

@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const mongoose = require("mongoose");
 const { ObjectId } = require("mongoose").Types;
 const { User, Category, Product } = require("../models");
 
@@ -51,7 +50,6 @@ const searchProducts = async (word = "", res = response) => {
 
   if (isMongoID) {
     const product = await Product.findById(word).populate("category", "name");
-
     return res.json({
       results: product ? [product] : [],
     });
@@ -97,17 +95,27 @@ const search = (req = request, res = response) => {
 const searchProductsForCategory = async (req = request, res = response) => {
   const { category } = req.params;
   const isMongoID = ObjectId.isValid(category); // TRUE
-  const id = mongoose.Types.ObjectId(category);
 
   if (isMongoID) {
-    const products = await Product.find({
-      category: id,
-    });
-
+    const product = await Product.findById(category).populate(
+      "category",
+      "name"
+    );
+    console.log(Product.category._id);
     return res.json({
-      results: products ? [products] : [],
+      results: product ? [product] : [],
     });
   }
+
+  //const regex = new RegExp(word, "i");
+  //const products = await Product.find({
+  //  name: regex,
+  //  state: true,
+  //}).populate("category", "name");
+
+  res.json({
+    results: products,
+  });
 };
 
 module.exports = {
