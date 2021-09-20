@@ -23,7 +23,7 @@ const loadFiles = (req, res = response) => {
 
   const nameTemp = uuidv4() + "." + extension;
 
-  const uploadPath = path.join(__dirname, "../uploads/", nameTemp);
+  const uploadPath = path.join(__dirname, "../uploads/", records.name);
 
   // Use the mv() method to place the file somewhere on your server
   records.mv(uploadPath, (err) => {

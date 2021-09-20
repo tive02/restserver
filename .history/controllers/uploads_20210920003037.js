@@ -1,6 +1,8 @@
 const { response } = require("express");
 const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
+ 
+
 
 const loadFiles = (req, res = response) => {
   if (!req.files || Object.keys(req.files).length === 0 || !req.files.records) {
@@ -21,19 +23,20 @@ const loadFiles = (req, res = response) => {
     });
   }
 
-  const nameTemp = uuidv4() + "." + extension;
+  const nameTemp= uuidv4();
 
-  const uploadPath = path.join(__dirname, "../uploads/", nameTemp);
 
-  // Use the mv() method to place the file somewhere on your server
-  records.mv(uploadPath, (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json(err);
-    }
+   const uploadPath = path.join(__dirname, "../uploads/", records.name);
 
-    res.json({ msg: "File uploaded! to" + uploadPath });
-  });
+    Use the mv() method to place the file somewhere on your server
+   records.mv(uploadPath, (err) => {
+     if (err) {
+       console.log(err);
+       return res.status(500).json(err);
+     }
+
+     res.json({ msg: "File uploaded! to" + uploadPath });
+    });
 };
 
 module.exports = {
