@@ -13,7 +13,7 @@ const loadFiles = (req, res = response) => {
   const extension = nameShort[nameShort.length - 1];
 
   //Validar la extencion.
-  const extensionsValidate = ["png", "jpg", "jpeg", "gif"];
+  const extensionsValidate = [, "jpg", "jpeg", "gif"];
   if (!extensionsValidate.includes(extension)) {
     return res.status(400).json({
       msg: `La extension ${extension} no es permitida, ${extensionsValidate}`,
