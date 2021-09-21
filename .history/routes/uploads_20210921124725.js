@@ -1,9 +1,8 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
 
-const { validateFields } = require("../middlewares");
+const { validateFields } = require("../middlewares/validate-fields");
 const { loadFiles, updateImage } = require("../controllers/uploads");
-const { publicAllocations } = require("../helpers");
 
 const router = Router();
 
@@ -15,7 +14,6 @@ router.put(
     check("collection").custom((c) =>
       publicAllocations(c, ["users", "products"])
     ),
-    validateFields,
   ],
   updateImage
 );

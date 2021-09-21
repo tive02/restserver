@@ -20,7 +20,7 @@ const loadFiles = async (req, res = response) => {
 const updateImage = async (req, res = response) => {
   const { id, collection } = req.params;
 
-  /* let model;
+  let model;
 
   switch (collection) {
     case "users":
@@ -50,14 +50,14 @@ const updateImage = async (req, res = response) => {
   // Limpiar imágenes previas
   if (model.img) {
     // Hay que borrar la imagen del servidor
-    const pathImage = path.join(
+    const pathImagen = path.join(
       __dirname,
       "../uploads",
       collection,
       model.img
     );
-    if (fs.existsSync(pathImage)) {
-      fs.unlinkSync(pathImage);
+    if (fs.existsSync(pathImagen)) {
+      fs.unlinkSync(pathImagen);
     }
   }
 
@@ -67,8 +67,6 @@ const updateImage = async (req, res = response) => {
   await model.save();
 
   res.json(model);
-*/
-  res.json({ id, collection });
 };
 
 module.exports = {

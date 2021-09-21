@@ -3,7 +3,6 @@ const { check } = require("express-validator");
 
 const { validateFields } = require("../middlewares");
 const { loadFiles, updateImage } = require("../controllers/uploads");
-const { publicAllocations } = require("../helpers");
 
 const router = Router();
 
