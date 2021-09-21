@@ -114,7 +114,7 @@ const getImage = async (req, res = response) => {
         model.img
       );
       if (fs.existsSync(pathImage)) {
-        return res.sendFile(pathImage);
+        fs.unlinkSync(pathImage);
       }
     }
   } catch (error) {
@@ -122,13 +122,11 @@ const getImage = async (req, res = response) => {
     return res.status(500).json({ msg: `Algo salio mal ${error}` });
   }
 
-  //const pathImage = path.join(__dirname, "../assets/no-image.jpg");
-  //res.sendFile(pathImage);
-  res.json({ msg: "Falta place holde" });
+  const pathImage = path.join(__dirname, "../assets/no-image.jpg");
+  res.sendFile(pathImage);
 };
 
 module.exports = {
   loadFiles,
   updateImage,
-  getImage,
 };

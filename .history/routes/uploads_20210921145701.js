@@ -20,7 +20,7 @@ router.put(
   ],
   updateImage
 );
-router.get(
+router.put(
   "/:collection/:id",
   [
     check("id", "El id debe de ser de mongo").isMongoId(),

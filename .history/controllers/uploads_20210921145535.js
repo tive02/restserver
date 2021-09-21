@@ -104,31 +104,19 @@ const getImage = async (req, res = response) => {
   }
 
   // Limpiar imágenes previas
-  try {
-    if (model.img) {
-      // Hay que borrar la imagen del servidor
-      const pathImage = path.join(
-        __dirname,
-        "../uploads",
-        collection,
-        model.img
-      );
-      if (fs.existsSync(pathImage)) {
-        return res.sendFile(pathImage);
-      }
+  if (model.img) {
+    // Hay que borrar la imagen del servidor
+    const pathImage = path.join(__dirname, "../uploads", collection, model.img);
+    if (fs.existsSync(pathImage)) {
+      return res.sendFile(pathImage);
     }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: `Algo salio mal ${error}` });
   }
 
-  //const pathImage = path.join(__dirname, "../assets/no-image.jpg");
-  //res.sendFile(pathImage);
-  res.json({ msg: "Falta place holde" });
+  const pathImage = path.join(__dirname, "../assets/no-image.jpg");
+  res.sendFile(pathImage);
 };
 
 module.exports = {
   loadFiles,
   updateImage,
-  getImage,
 };
