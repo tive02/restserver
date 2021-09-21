@@ -9,8 +9,8 @@ const loadFiles = async (req, res = response) => {
 
   try {
     // txt, md
-    //const name = await uploadFile(req.files, ["txt", "md"], "texts");
-    const name = await uploadFile(req.files, undefined, "imgs");
+    const name = await uploadFile(req.files, ["txt", "md"], "texts");
+    //const name = await uploadFile( req.files, undefined, 'imgs' );
     res.json({ name });
   } catch (msg) {
     res.status(400).json({ msg });
