@@ -7,7 +7,7 @@ const { publicAllocations } = require("../helpers");
 
 const router = Router();
 
-router.post("/", validateFileSubmit, loadFiles);
+router.post("/", loadFiles);
 router.put(
   "/:collection/:id",
   [

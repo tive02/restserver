@@ -60,10 +60,7 @@ const updateImage = async (req, res = response) => {
         fs.unlinkSync(pathImage);
       }
     }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: `Algo salio mal ${error}` });
-  }
+  } catch (error) {}
 
   const name = await uploadFile(req.files, undefined, collection);
   model.img = name;
