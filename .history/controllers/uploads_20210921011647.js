@@ -8,10 +8,10 @@ const loadFiles = async (req, res = response) => {
   }
 
   //Imagenes
-  const name = await uploadFile(req.files);
+  const pathComplete = await uploadFile(req.files);
 
   res.json({
-    name,
+    name: pathComplete,
   });
 };
 

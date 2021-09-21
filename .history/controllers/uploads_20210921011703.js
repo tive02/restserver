@@ -11,7 +11,7 @@ const loadFiles = async (req, res = response) => {
   const name = await uploadFile(req.files);
 
   res.json({
-    name,
+    name: pathComplete,
   });
 };
 
