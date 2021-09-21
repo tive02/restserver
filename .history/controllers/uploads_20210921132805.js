@@ -1,6 +1,5 @@
 const { response } = require("express");
 const { uploadFile } = require("../helpers");
-const { User, Product } = require("../models");
 
 const loadFiles = async (req, res = response) => {
   if (!req.files || Object.keys(req.files).length === 0 || !req.files.records) {
@@ -61,13 +60,15 @@ const updateImage = async (req, res = response) => {
       fs.unlinkSync(pathImage);
     }
   }
-*/
-  const name = await uploadFile(req.files, undefined, collection);
+
+  const name = await loadFiles(req.files, undefined, collection);
   model.img = name;
 
   await model.save();
 
-  res.json(model);
+  res.json(model);*/
+
+  res.json({ id, collection });
 };
 
 module.exports = {

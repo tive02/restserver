@@ -1,6 +1,5 @@
 const { response } = require("express");
 const { uploadFile } = require("../helpers");
-const { User, Product } = require("../models");
 
 const loadFiles = async (req, res = response) => {
   if (!req.files || Object.keys(req.files).length === 0 || !req.files.records) {
@@ -48,21 +47,16 @@ const updateImage = async (req, res = response) => {
       return res.status(500).json({ msg: "Se me olvidó validar esto" });
   }
 
-  /*  // Limpiar imágenes previas
+  // Limpiar imágenes previas
   if (model.img) {
     // Hay que borrar la imagen del servidor
-    const pathImage = path.join(
-      __dirname,
-      "../uploads",
-      collection,
-      model.img
-    );
+    const pathImage = path.join(__dirname, "../uploads", collection, model.img);
     if (fs.existsSync(pathImage)) {
       fs.unlinkSync(pathImage);
     }
   }
-*/
-  const name = await uploadFile(req.files, undefined, collection);
+
+  const name = await loadFiles(req.files, undefined, collection);
   model.img = name;
 
   await model.save();

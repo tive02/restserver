@@ -62,7 +62,7 @@ const updateImage = async (req, res = response) => {
     }
   }
 */
-  const name = await uploadFile(req.files, undefined, collection);
+  const name = await loadFiles(req.files, undefined, collection);
   model.img = name;
 
   await model.save();
