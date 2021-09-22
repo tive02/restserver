@@ -115,9 +115,8 @@ const updateImageCloudinary = async (req, res = response) => {
     return res.status(500).json({ msg: `Algo salio mal ${error}` });
   }
 
-  const { tempFilePath } = req.files.records;
-  const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-  model.img = secure_url;
+  const name = await uploadFile(req.files, undefined, collection);
+  model.img = name;
 
   await model.save();
 

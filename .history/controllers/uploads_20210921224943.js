@@ -77,14 +77,14 @@ const updateImage = async (req, res = response) => {
 };
 
 const updateImageCloudinary = async (req, res = response) => {
-  const { id, collection } = req.params;
+  const { id, coleccion } = req.params;
 
-  let model;
+  let modelo;
 
-  switch (collection) {
-    case "users":
-      model = await User.findById(id);
-      if (!model) {
+  switch (coleccion) {
+    case "usuarios":
+      modelo = await Usuario.findById(id);
+      if (!modelo) {
         return res.status(400).json({
           msg: `No existe un usuario con el id ${id}`,
         });
@@ -92,9 +92,9 @@ const updateImageCloudinary = async (req, res = response) => {
 
       break;
 
-    case "products":
-      model = await Product.findById(id);
-      if (!model) {
+    case "productos":
+      modelo = await Producto.findById(id);
+      if (!modelo) {
         return res.status(400).json({
           msg: `No existe un producto con el id ${id}`,
         });
@@ -107,21 +107,20 @@ const updateImageCloudinary = async (req, res = response) => {
   }
 
   // Limpiar imágenes previas
-  try {
-    if (model.img) {
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: `Algo salio mal ${error}` });
+  if (modelo.img) {
+    const nombreArr = modelo.img.split("/");
+    const nombre = nombreArr[nombreArr.length - 1];
+    const [public_id] = nombre.split(".");
+    cloudinary.uploader.destroy(public_id);
   }
 
-  const { tempFilePath } = req.files.records;
+  const { tempFilePath } = req.files.archivo;
   const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-  model.img = secure_url;
+  modelo.img = secure_url;
 
-  await model.save();
+  await modelo.save();
 
-  res.json(model);
+  res.json(modelo);
 };
 const getImage = async (req, res = response) => {
   const { id, collection } = req.params;

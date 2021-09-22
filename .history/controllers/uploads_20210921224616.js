@@ -76,53 +76,6 @@ const updateImage = async (req, res = response) => {
   res.json(model);
 };
 
-const updateImageCloudinary = async (req, res = response) => {
-  const { id, collection } = req.params;
-
-  let model;
-
-  switch (collection) {
-    case "users":
-      model = await User.findById(id);
-      if (!model) {
-        return res.status(400).json({
-          msg: `No existe un usuario con el id ${id}`,
-        });
-      }
-
-      break;
-
-    case "products":
-      model = await Product.findById(id);
-      if (!model) {
-        return res.status(400).json({
-          msg: `No existe un producto con el id ${id}`,
-        });
-      }
-
-      break;
-
-    default:
-      return res.status(500).json({ msg: "Se me olvidó validar esto" });
-  }
-
-  // Limpiar imágenes previas
-  try {
-    if (model.img) {
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ msg: `Algo salio mal ${error}` });
-  }
-
-  const { tempFilePath } = req.files.records;
-  const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-  model.img = secure_url;
-
-  await model.save();
-
-  res.json(model);
-};
 const getImage = async (req, res = response) => {
   const { id, collection } = req.params;
 
@@ -179,6 +132,5 @@ const getImage = async (req, res = response) => {
 module.exports = {
   loadFiles,
   updateImage,
-  updateImageCloudinary,
   getImage,
 };

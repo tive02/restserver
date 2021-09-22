@@ -109,15 +109,24 @@ const updateImageCloudinary = async (req, res = response) => {
   // Limpiar imágenes previas
   try {
     if (model.img) {
+      // Hay que borrar la imagen del servidor
+      const pathImage = path.join(
+        __dirname,
+        "../uploads",
+        collection,
+        model.img
+      );
+      if (fs.existsSync(pathImage)) {
+        fs.unlinkSync(pathImage);
+      }
     }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: `Algo salio mal ${error}` });
   }
 
-  const { tempFilePath } = req.files.records;
-  const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-  model.img = secure_url;
+  const name = await uploadFile(req.files, undefined, collection);
+  model.img = name;
 
   await model.save();
 
